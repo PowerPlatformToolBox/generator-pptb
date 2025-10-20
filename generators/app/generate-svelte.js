@@ -1,0 +1,112 @@
+import Generator from 'yeoman-generator';
+import * as prompts from './prompts.js';
+
+/**
+ * @typedef {import('./index.js').ToolConfig} ToolConfig
+ */
+
+/**
+ * @type {import('./index.js').ToolGenerator}
+ */
+export default {
+    id: 'tool-svelte',
+    aliases: ['svelte'],
+    name: 'Svelte',
+    
+    /**
+     * @param {Generator} generator
+     * @param {ToolConfig} toolConfig
+     */
+    prompting: async (generator, toolConfig) => {
+        await prompts.askForToolDisplayName(generator, toolConfig);
+        await prompts.askForToolId(generator, toolConfig);
+        await prompts.askForToolDescription(generator, toolConfig);
+        await prompts.askForGit(generator, toolConfig);
+        await prompts.askForPackageManager(generator, toolConfig);
+    },
+    
+    /**
+     * @param {Generator} generator
+     * @param {ToolConfig} toolConfig
+     */
+    writing: (generator, toolConfig) => {
+        // Copy package.json template
+        generator.fs.copyTpl(
+            generator.templatePath('svelte/package.json'),
+            generator.destinationPath('package.json'),
+            toolConfig
+        );
+
+        // Copy tsconfig.json
+        generator.fs.copy(
+            generator.templatePath('svelte/tsconfig.json'),
+            generator.destinationPath('tsconfig.json')
+        );
+
+        // Copy vite.config.ts
+        generator.fs.copy(
+            generator.templatePath('svelte/vite.config.ts'),
+            generator.destinationPath('vite.config.ts')
+        );
+
+        // Copy svelte.config.js
+        generator.fs.copy(
+            generator.templatePath('svelte/svelte.config.js'),
+            generator.destinationPath('svelte.config.js')
+        );
+
+        // Copy .gitignore if git is initialized
+        if (toolConfig.gitInit) {
+            generator.fs.copy(
+                generator.templatePath('svelte/gitignore'),
+                generator.destinationPath('.gitignore')
+            );
+        }
+
+        // Copy .npmignore
+        generator.fs.copy(
+            generator.templatePath('svelte/npmignore'),
+            generator.destinationPath('.npmignore')
+        );
+
+        // Copy README
+        generator.fs.copyTpl(
+            generator.templatePath('svelte/README.md'),
+            generator.destinationPath('README.md'),
+            toolConfig
+        );
+
+        // Copy index.html
+        generator.fs.copyTpl(
+            generator.templatePath('svelte/index.html'),
+            generator.destinationPath('index.html'),
+            toolConfig
+        );
+
+        // Copy source files
+        generator.fs.copy(
+            generator.templatePath('svelte/src/main.ts'),
+            generator.destinationPath('src/main.ts')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('svelte/src/App.svelte'),
+            generator.destinationPath('src/App.svelte')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('svelte/src/styles.css'),
+            generator.destinationPath('src/styles.css')
+        );
+    },
+    
+    /**
+     * @param {Generator} generator
+     * @param {ToolConfig} toolConfig
+     */
+    endMessage: (generator, toolConfig) => {
+        generator.log('Your Svelte tool is ready!');
+        generator.log('Build your tool with: ' + (toolConfig.pkgManager === 'npm' ? 'npm run build' : toolConfig.pkgManager + ' build'));
+        generator.log('Start dev server with: ' + (toolConfig.pkgManager === 'npm' ? 'npm run dev' : toolConfig.pkgManager + ' dev'));
+    }
+};

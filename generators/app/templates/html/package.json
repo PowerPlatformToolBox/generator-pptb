@@ -1,0 +1,18 @@
+{
+  "name": "<%= name %>",
+  "version": "0.1.0",
+  "displayName": "<%= displayName %>",
+  "description": "<%= description %>",
+  "author": "Power Platform ToolBox",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && npm run copy-html && npm run copy-css",
+    "copy-html": "cp src/index.html dist/",
+    "copy-css": "cp src/styles.css dist/",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@pptb/types": "^1.0.0",
+    "typescript": "^5.6.3"
+  }
+}
