@@ -556,10 +556,17 @@ function log(message: string, type: 'info' | 'success' | 'warning' | 'error' = '
     const timestamp = new Date().toLocaleTimeString();
     const logEntry = document.createElement('div');
     logEntry.className = `log-entry ${type}`;
-    logEntry.innerHTML = `
-        <span class="log-timestamp">[${timestamp}]</span>
-        <span>${message}</span>
-    `;
+    
+    const timestampSpan = document.createElement('span');
+    timestampSpan.className = 'log-timestamp';
+    timestampSpan.textContent = `[${timestamp}]`;
+    
+    const messageSpan = document.createElement('span');
+    messageSpan.textContent = message;
+    
+    logEntry.appendChild(timestampSpan);
+    logEntry.appendChild(document.createTextNode(' '));
+    logEntry.appendChild(messageSpan);
 
     logDiv.insertBefore(logEntry, logDiv.firstChild);
     
