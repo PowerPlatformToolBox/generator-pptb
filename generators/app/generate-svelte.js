@@ -43,6 +43,12 @@ export default {
             generator.destinationPath('tsconfig.json')
         );
 
+        // Copy tsconfig.node.json
+        generator.fs.copy(
+            generator.templatePath('svelte/tsconfig.node.json'),
+            generator.destinationPath('tsconfig.node.json')
+        );
+
         // Copy vite.config.ts
         generator.fs.copy(
             generator.templatePath('svelte/vite.config.js'),
