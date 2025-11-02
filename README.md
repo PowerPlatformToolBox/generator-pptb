@@ -2,8 +2,8 @@
 
 Yeoman generator for creating Power Platform Tool Box (PPTB) tools with TypeScript.
 
-[![npm version](https://badge.fury.io/js/generator-pptb.svg)](https://www.npmjs.com/package/generator-pptb)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm Version](https://img.shields.io/npm/v/generator-pptb)](https://www.npmjs.com/package/generator-pptb)
+[![GitHub License](https://img.shields.io/github/license/PowerPlatformToolBox/generator-pptb)](https://github.com/PowerPlatformToolBox/generator-pptb?tab=GPL-3.0-1-ov-file)
 
 ## Quick Start
 
