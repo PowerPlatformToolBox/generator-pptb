@@ -43,6 +43,12 @@ export default {
             generator.destinationPath('tsconfig.json')
         );
 
+        // Copy tsconfig.node.json
+        generator.fs.copy(
+            generator.templatePath('react/tsconfig.node.json'),
+            generator.destinationPath('tsconfig.node.json')
+        );
+
         // Copy vite.config.ts
         generator.fs.copy(
             generator.templatePath('react/vite.config.ts'),
@@ -89,8 +95,40 @@ export default {
         );
 
         generator.fs.copy(
-            generator.templatePath('react/src/styles.css'),
-            generator.destinationPath('src/styles.css')
+            generator.templatePath('react/src/index.css'),
+            generator.destinationPath('src/index.css')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('react/src/vite-env.d.ts'),
+            generator.destinationPath('src/vite-env.d.ts')
+        );
+
+        // Copy components
+        generator.fs.copy(
+            generator.templatePath('react/src/components/ConnectionStatus.tsx'),
+            generator.destinationPath('src/components/ConnectionStatus.tsx')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('react/src/components/DataverseAPIDemo.tsx'),
+            generator.destinationPath('src/components/DataverseAPIDemo.tsx')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('react/src/components/EventLog.tsx'),
+            generator.destinationPath('src/components/EventLog.tsx')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('react/src/components/ToolboxAPIDemo.tsx'),
+            generator.destinationPath('src/components/ToolboxAPIDemo.tsx')
+        );
+
+        // Copy hooks
+        generator.fs.copy(
+            generator.templatePath('react/src/hooks/useToolboxAPI.ts'),
+            generator.destinationPath('src/hooks/useToolboxAPI.ts')
         );
     },
     

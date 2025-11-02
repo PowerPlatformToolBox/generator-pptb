@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "displayName": "<%= displayName %>",
   "description": "<%= description %>",
+  "main": "index.html",
   "author": "Power Platform ToolBox",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "build": "vite build",
+    "build": "tsc && vite build",
     "dev": "vite",
     "preview": "vite preview"
   },
@@ -15,10 +19,14 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
+    "@pptb/types": "^1.0.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.6.3",
-    "vite": "^6.0.7"
-  }
+    "vite": "^7.1.11"
+  },
+  "files": [
+    "dist"
+  ]
 }
