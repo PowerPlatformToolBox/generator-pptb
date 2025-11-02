@@ -43,6 +43,12 @@ export default {
             generator.destinationPath('tsconfig.json')
         );
 
+        // Copy tsconfig.node.json
+        generator.fs.copy(
+            generator.templatePath('vue/tsconfig.node.json'),
+            generator.destinationPath('tsconfig.node.json')
+        );
+
         // Copy vite.config.ts
         generator.fs.copy(
             generator.templatePath('vue/vite.config.ts'),
@@ -89,8 +95,40 @@ export default {
         );
 
         generator.fs.copy(
-            generator.templatePath('vue/src/styles.css'),
-            generator.destinationPath('src/styles.css')
+            generator.templatePath('vue/src/style.css'),
+            generator.destinationPath('src/style.css')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('vue/src/vite-env.d.ts'),
+            generator.destinationPath('src/vite-env.d.ts')
+        );
+
+        // Copy components
+        generator.fs.copy(
+            generator.templatePath('vue/src/components/ConnectionStatus.vue'),
+            generator.destinationPath('src/components/ConnectionStatus.vue')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('vue/src/components/DataverseAPIDemo.vue'),
+            generator.destinationPath('src/components/DataverseAPIDemo.vue')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('vue/src/components/EventLog.vue'),
+            generator.destinationPath('src/components/EventLog.vue')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('vue/src/components/ToolboxAPIDemo.vue'),
+            generator.destinationPath('src/components/ToolboxAPIDemo.vue')
+        );
+
+        // Copy composables
+        generator.fs.copy(
+            generator.templatePath('vue/src/composables/useToolboxAPI.ts'),
+            generator.destinationPath('src/composables/useToolboxAPI.ts')
         );
     },
     

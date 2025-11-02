@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "displayName": "<%= displayName %>",
   "description": "<%= description %>",
+  "main": "index.html",
   "author": "Power Platform ToolBox",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "build": "vite build",
+    "build": "vue-tsc && vite build",
     "dev": "vite",
     "preview": "vite preview"
   },
@@ -15,9 +19,13 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@pptb/types": "^1.0.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "typescript": "^5.6.3",
-    "vite": "^6.0.7",
+    "vite": "^5.4.11",
     "vue-tsc": "^2.2.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
