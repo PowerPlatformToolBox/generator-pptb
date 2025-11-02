@@ -1,11 +1,11 @@
 {
   "name": "generator-pptb",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Yeoman generator for Power Platform Tool Box tools",
   "keywords": [
     "yeoman-generator",
     "power platform",
-    "toolbox",
+    "power platform tool box",
     "pptb",
     "scaffolding"
   ],
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/PowerPlatformToolBox/generator-pptb",
   "license": "MIT",
   "author": {
-    "name": "Power Platform ToolBox",
+    "name": "Power Platform Tool Box",
     "url": "https://github.com/PowerPlatformToolBox"
   },
   "engines": {

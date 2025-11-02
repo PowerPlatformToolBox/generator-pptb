@@ -25,6 +25,12 @@ Or create in a specific directory:
 yo pptb my-tool-name
 ```
 
+If you do not want to download Yeoman and PPTB Generator globally you can run the below command:
+
+```bash
+npx --package yo --package generator-pptb -- yo pptb
+```
+
 ## What is Power Platform Tool Box?
 
 Power Platform Tool Box (PPTB) is a framework for building custom tools that integrate with Microsoft Power Platform. This generator helps you quickly scaffold new PPTB tools with best practices and modern development tooling.
@@ -192,21 +198,17 @@ After generating your tool:
 
 4. **Test in PPTB:**
    - Build your tool
-   - Install it in PPTB
-   - Load and test from the ToolBox interface
+   - Deploy to npm
+   - Install it in PPTB using debug window
+   - Load and test from the Tool Box interface
 
 ## PPTB API
 
-All generated tools include access to the PPTB API via `window.toolboxAPI`. The API provides:
+All generated tools include access to the PPTB APIs via `window.toolboxAPI` and `window.dataverseAPI`. 
 
-- **Tool Context** - Get connection URL and access token
-- **Notifications** - Show success/error messages
-- **Events** - Subscribe to ToolBox events
-- **Connections** - List and manage Power Platform connections
-- **Terminals** - Create and execute terminal commands
-- **Clipboard** - Copy data to clipboard
+Full list of API references is [here](https://github.com/PowerPlatformToolBox/desktop-app/blob/main/packages/README.md#api-reference).
 
-See the generated README in your tool for examples.
+> See the generated README in your tool for examples.
 
 ## Sample Tools
 
@@ -222,10 +224,6 @@ https://github.com/PowerPlatformToolBox/sample-tools
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-MIT
 
 ## Links
 
