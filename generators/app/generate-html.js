@@ -71,8 +71,8 @@ export default {
         );
 
         generator.fs.copy(
-            generator.templatePath('html/src/index.ts'),
-            generator.destinationPath('src/index.ts')
+            generator.templatePath('html/src/app.ts'),
+            generator.destinationPath('src/app.ts')
         );
 
         generator.fs.copy(

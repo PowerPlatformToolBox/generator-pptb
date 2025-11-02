@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "displayName": "<%= displayName %>",
   "description": "<%= description %>",
+  "main": "index.html",
   "author": "Power Platform ToolBox",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "tsc && npm run copy-html && npm run copy-css",
-    "copy-html": "cp src/index.html dist/",
-    "copy-css": "cp src/styles.css dist/",
+    "copy-html": "shx cp src/index.html dist/",
+    "copy-css": "shx cp src/styles.css dist/",
     "watch": "tsc --watch"
   },
   "devDependencies": {
-    "@pptb/types": "^1.0.0",
-    "typescript": "^5.6.3"
-  }
+    "@pptb/types": "^1.0.1",
+    "typescript": "^5.0.0",
+    "shx": "^0.4.0"
+  },
+  "files": [
+    "dist"
+  ]
 }

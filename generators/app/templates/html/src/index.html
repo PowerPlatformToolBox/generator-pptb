@@ -3,67 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerPlatform Example Tool</title>
+    <title>HTML Sample Tool</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🔧 PowerPlatform Example Tool</h1>
-            <p>HTML-first architecture with TypeScript</p>
+            <h1>🚀 HTML Sample Tool</h1>
+            <p class="subtitle">A complete example of building Power Platform Tool Box tools with HTML & TypeScript</p>
         </header>
 
-        <section class="info-panel">
-            <h2>Connection Information</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <label>Tool ID:</label>
-                    <span id="tool-id">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <label>Connection URL:</label>
-                    <span id="connection-url">Loading...</span>
-                </div>
-                <div class="info-item">
-                    <label>Access Token:</label>
-                    <span id="access-token">Loading...</span>
-                </div>
+        <!-- Connection Status -->
+        <section class="card">
+            <h2>🔗 Connection Status</h2>
+            <div id="connection-info" class="info-box">
+                <div class="loading">Checking connection...</div>
             </div>
         </section>
 
-        <section class="actions-panel">
-            <h2>Quick Actions</h2>
-            <div class="button-grid">
-                <button id="btn-show-notification" class="btn btn-primary">
-                    Show Notification
-                </button>
-                <button id="btn-get-connections" class="btn btn-secondary">
-                    Get Connections
-                </button>
-                <button id="btn-copy-url" class="btn btn-secondary">
-                    Copy Connection URL
-                </button>
-                <button id="btn-get-tools" class="btn btn-secondary">
-                    List All Tools
-                </button>
-                <button id="btn-run-terminal-test" class="btn btn-secondary">
-                    Run Terminal Test
-                </button>
+        <!-- ToolBox API Examples -->
+        <section class="card">
+            <h2>🛠️ ToolBox API Examples</h2>
+            
+            <div class="example-group">
+                <h3>Notifications</h3>
+                <div class="button-group">
+                    <button id="show-success-btn" class="btn btn-success">Show Success</button>
+                    <button id="show-info-btn" class="btn btn-info">Show Info</button>
+                    <button id="show-warning-btn" class="btn btn-warning">Show Warning</button>
+                    <button id="show-error-btn" class="btn btn-error">Show Error</button>
+                </div>
+            </div>
+
+            <div class="example-group">
+                <h3>Utilities</h3>
+                <div class="button-group">
+                    <button id="copy-clipboard-btn" class="btn">Copy to Clipboard</button>
+                    <button id="get-theme-btn" class="btn">Get Theme</button>
+                    <button id="save-file-btn" class="btn">Save File</button>
+                </div>
+            </div>
+
+            <div class="example-group">
+                <h3>Terminal</h3>
+                <div class="button-group">
+                    <button id="create-terminal-btn" class="btn">Create Terminal</button>
+                    <button id="execute-command-btn" class="btn" disabled>Execute Command</button>
+                    <button id="close-terminal-btn" class="btn" disabled>Close Terminal</button>
+                </div>
+                <div id="terminal-output" class="output"></div>
             </div>
         </section>
 
-        <section class="events-panel">
-            <h2>Event Log</h2>
-            <div id="event-log" class="event-log"></div>
-            <button id="btn-clear-log" class="btn btn-small">Clear Log</button>
+        <!-- Dataverse API Examples -->
+        <section class="card">
+            <h2>💾 Dataverse API Examples</h2>
+            
+            <div class="example-group">
+                <h3>Query Records</h3>
+                <button id="query-accounts-btn" class="btn btn-primary">Query Top 10 Accounts</button>
+                <div id="query-output" class="output"></div>
+            </div>
+
+            <div class="example-group">
+                <h3>CRUD Operations</h3>
+                <div class="input-group">
+                    <label for="contact-firstname">Contact First Name:</label>
+                    <input type="text" id="contact-firstname" placeholder="Enter contact first name" value="Sample">
+                </div>
+                <div class="input-group">
+                    <label for="contact-lastname">Contact Last Name:</label>
+                    <input type="text" id="contact-lastname" placeholder="Enter contact last name" value="Contact">
+                </div>
+                <div class="button-group">
+                    <button id="create-contact-btn" class="btn btn-primary">Create Contact</button>
+                    <button id="update-contact-btn" class="btn" disabled>Update Contact</button>
+                    <button id="delete-contact-btn" class="btn btn-error" disabled>Delete Contact</button>
+                </div>
+                <div id="crud-output" class="output"></div>
+            </div>
+
+            <div class="example-group">
+                <h3>Metadata</h3>
+                <button id="get-metadata-btn" class="btn">Get Contact Metadata</button>
+                <div id="metadata-output" class="output"></div>
+            </div>
         </section>
 
-        <section class="output-panel">
-            <h2>Output</h2>
-            <pre id="output"></pre>
+        <!-- Event Log -->
+        <section class="card">
+            <h2>📋 Event Log</h2>
+            <button id="clear-log-btn" class="btn btn-secondary">Clear Log</button>
+            <div id="event-log" class="log"></div>
         </section>
     </div>
 
-    <script type="module" src="index.js"></script>
+    <script src="app.js" type="module"></script>
 </body>
 </html>
