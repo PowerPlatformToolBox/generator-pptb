@@ -13,7 +13,8 @@
     "build": "tsc && npm run copy-html && npm run copy-css",
     "copy-html": "shx cp src/index.html dist/",
     "copy-css": "shx cp src/styles.css dist/",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "finalize-package": "npm shrinkwrap"
   },
   "devDependencies": {
     "@pptb/types": "^1.0.1",

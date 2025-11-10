@@ -196,8 +196,15 @@ After generating your tool:
    npm run build
    ```
 
-4. **Test in PPTB:**
+4. **Finalize package for publishing:**
+   ```bash
+   npm run finalize-package
+   ```
+   This creates an `npm-shrinkwrap.json` file that locks dependencies for security and ensures consistent installations.
+
+5. **Test in PPTB:**
    - Build your tool
+   - Run `npm run finalize-package` to generate shrinkwrap
    - Deploy to npm
    - Install it in PPTB using debug window
    - Load and test from the Tool Box interface

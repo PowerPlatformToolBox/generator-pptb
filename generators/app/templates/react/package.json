@@ -12,7 +12,8 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "finalize-package": "npm shrinkwrap"
   },
   "dependencies": {
     "react": "^18.3.1",
