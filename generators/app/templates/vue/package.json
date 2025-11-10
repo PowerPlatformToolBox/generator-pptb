@@ -27,6 +27,7 @@
     "vue-tsc": "^2.2.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "npm-shrinkwrap.json"
   ]
 }

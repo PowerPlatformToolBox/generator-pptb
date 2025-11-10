@@ -28,6 +28,7 @@
     "vite": "^7.1.11"
   },
   "files": [
-    "dist"
+    "dist",
+    "npm-shrinkwrap.json"
   ]
 }
