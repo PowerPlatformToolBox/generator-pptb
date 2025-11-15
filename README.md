@@ -49,9 +49,11 @@ Power Platform Tool Box (PPTB) is a framework for building custom tools that int
 The generator supports four different tool types:
 
 ### 1. HTML with TypeScript
+
 A simple HTML-first architecture with TypeScript. Perfect for lightweight tools.
 
 **Features:**
+
 - Pure HTML, CSS, and TypeScript
 - Direct DOM manipulation
 - Minimal dependencies
@@ -60,20 +62,25 @@ A simple HTML-first architecture with TypeScript. Perfect for lightweight tools.
 **Best for:** Simple tools, forms, data viewers
 
 ### 2. React
+
 Modern React 18 application with TypeScript and Vite.
 
 **Features:**
+
 - React 18 with hooks
 - TypeScript support
 - Vite for fast HMR
 - Component-based architecture
+- Fluent 9 UI components
 
 **Best for:** Complex UIs, interactive dashboards, data-driven applications
 
 ### 3. Vue
+
 Vue 3 Composition API with TypeScript and Vite.
 
 **Features:**
+
 - Vue 3 with Composition API
 - TypeScript support
 - Vite for fast HMR
@@ -82,9 +89,11 @@ Vue 3 Composition API with TypeScript and Vite.
 **Best for:** Progressive web apps, admin panels, forms
 
 ### 4. Svelte
+
 Svelte 5 with TypeScript and Vite.
 
 **Features:**
+
 - Svelte 5 with runes
 - TypeScript support
 - Vite for fast HMR
@@ -103,6 +112,7 @@ yo pptb
 ```
 
 You'll be prompted to:
+
 1. Choose a tool type (HTML/TypeScript, React, Vue, or Svelte)
 2. Enter a tool name
 3. Enter a tool identifier (package name)
@@ -177,29 +187,34 @@ my-tool/
 After generating your tool:
 
 1. **Install dependencies:**
+
    ```bash
    cd my-tool
    npm install
    ```
 
 2. **Start development:**
+
    ```bash
    # For HTML/TypeScript
    npm run watch
-   
+
    # For React/Vue/Svelte
    npm run dev
    ```
 
 3. **Build for production:**
+
    ```bash
    npm run build
    ```
 
 4. **Finalize package for publishing:**
+
    ```bash
    npm run finalize-package
    ```
+
    This creates an `npm-shrinkwrap.json` file that locks dependencies for security and ensures consistent installations.
 
 5. **Test in PPTB:**
@@ -211,7 +226,7 @@ After generating your tool:
 
 ## PPTB API
 
-All generated tools include access to the PPTB APIs via `window.toolboxAPI` and `window.dataverseAPI`. 
+All generated tools include access to the PPTB APIs via `window.toolboxAPI` and `window.dataverseAPI`.
 
 Full list of API references is [here](https://github.com/PowerPlatformToolBox/desktop-app/blob/main/packages/README.md#api-reference).
 
@@ -241,5 +256,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Support
 
 For issues and questions:
+
 - Open an issue on [GitHub](https://github.com/PowerPlatformToolBox/generator-pptb/issues)
 - Check the [sample tools repository](https://github.com/PowerPlatformToolBox/sample-tools)
