@@ -203,26 +203,29 @@ After generating your tool:
     npm run dev
     ```
 
-3. **Build for production:**
+3. **Test in PPTB*:**
+   - Build your tool
+   - Run the PPTB Desktop App
+   - Go to settings, select the Show Debug Menu option and select Save
+   - In the Debug menu, select Browse under Load Local Tool
+   - Select the root directory containing your tool's package.json and select Load Tool
+   - Test from the Tool Box interface
+        - To debug / set breakpoints etc. select the Help menu and select Toggle Tool Dev Tools to open the developer console while the tool is running
 
-    ```bash
-    npm run build
-    ```
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
-4. **Finalize package for publishing:**
+5. **Finalize package and publish*:**
+   -Run finalize-package to shrinkwrap
+   ```bash
+   npm run finalize-package
+   ```
+   This creates an `npm-shrinkwrap.json` file that locks dependencies for security and ensures consistent installations.
+   - Deploy to npm
 
-    ```bash
-    npm run finalize-package
-    ```
-
-    This creates an `npm-shrinkwrap.json` file that locks dependencies for security and ensures consistent installations.
-
-5. **Test in PPTB:**
-    - Build your tool
-    - Run `npm run finalize-package` to generate shrinkwrap
-    - Deploy to npm
-    - Install it in PPTB using debug window
-    - Load and test from the Tool Box interface
+***For more information on development, testing and releasing your tool see the [Tool Development Guide](https://github.com/PowerPlatformToolBox/desktop-app/blob/main/docs/TOOLBOX_DEV.md)**
 
 ## PPTB API
 
@@ -249,9 +252,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Links
 
--   [Power Platform Tool Box](https://github.com/PowerPlatformToolBox)
--   [Sample Tools](https://github.com/PowerPlatformToolBox/sample-tools)
--   [Yeoman](https://yeoman.io/)
+- [Tool Development Guide](https://github.com/PowerPlatformToolBox/desktop-app/blob/main/docs/TOOLBOX_DEV.md)
+- [Power Platform Tool Box](https://github.com/PowerPlatformToolBox)
+- [Sample Tools](https://github.com/PowerPlatformToolBox/sample-tools)
+- [Yeoman](https://yeoman.io/)
 
 ## Support
 
