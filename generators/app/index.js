@@ -1,9 +1,11 @@
 import Generator from 'yeoman-generator';
 import yosay from 'yosay';
-import { fileURLToPath } from 'url';
 import * as path from 'path';
 import html from './generate-html.js';
 import react from './generate-react.js';
+import reactant from './generate-reactant.js';
+import reactfluent from './generate-reactfluent.js';
+import reactmui from './generate-reactmui.js';
 import vue from './generate-vue.js';
 import svelte from './generate-svelte.js';
 
@@ -30,12 +32,9 @@ import svelte from './generate-svelte.js';
 /**
  * @type {ToolGenerator[]}
  */
-const toolGenerators = [
-    html, react, vue, svelte
-];
+const toolGenerators = [html, react, reactant, reactfluent, reactmui, vue, svelte];
 
 export default class extends Generator {
-
     /**
      * @type {ToolConfig}
      */
@@ -45,19 +44,40 @@ export default class extends Generator {
         super(args, opts);
         this.description = 'Generates a Power Platform Tool Box tool ready for development.';
 
-        this.argument('destination', { 
-            type: String, 
-            required: false, 
-            description: `\n    The folder to create the tool in, absolute or relative to the current working directory.\n    Use '.' for the current folder. If not provided, defaults to a folder with the tool display name.\n  ` 
+        this.argument('destination', {
+            type: String,
+            required: false,
+            description: `\n    The folder to create the tool in, absolute or relative to the current working directory.\n    Use '.' for the current folder. If not provided, defaults to a folder with the tool display name.\n  `,
         });
 
-        this.option('quick', { type: Boolean, alias: 'q', description: 'Quick mode, skip all optional prompts and use defaults' });
-        this.option('toolType', { type: String, alias: 't', description: toolGenerators.map(g => g.aliases[0]).join(', ') });
-        this.option('toolDisplayName', { type: String, alias: 'n', description: 'Display name of the tool' });
+        this.option('quick', {
+            type: Boolean,
+            alias: 'q',
+            description: 'Quick mode, skip all optional prompts and use defaults',
+        });
+        this.option('toolType', {
+            type: String,
+            alias: 't',
+            description: toolGenerators.map((g) => g.aliases[0]).join(', '),
+        });
+        this.option('toolDisplayName', {
+            type: String,
+            alias: 'n',
+            description: 'Display name of the tool',
+        });
         this.option('toolId', { type: String, description: 'Id of the tool' });
-        this.option('toolDescription', { type: String, description: 'Description of the tool' });
-        this.option('pkgManager', { type: String, description: `'npm', 'yarn' or 'pnpm'` });
-        this.option('gitInit', { type: Boolean, description: `Initialize a git repo` });
+        this.option('toolDescription', {
+            type: String,
+            description: 'Description of the tool',
+        });
+        this.option('pkgManager', {
+            type: String,
+            description: `'npm', 'yarn' or 'pnpm'`,
+        });
+        this.option('gitInit', {
+            type: Boolean,
+            description: `Initialize a git repo`,
+        });
 
         this.toolConfig = Object.create(null);
         this.toolGenerator = undefined;
@@ -79,12 +99,12 @@ export default class extends Generator {
         // Ask for tool type
         const toolType = this.options['toolType'];
         if (toolType) {
-            const toolGenerator = toolGenerators.find(g => g.aliases.indexOf(toolType) !== -1);
+            const toolGenerator = toolGenerators.find((g) => g.aliases.indexOf(toolType) !== -1);
             if (toolGenerator) {
                 this.toolConfig.type = toolGenerator.id;
                 this.toolGenerator = toolGenerator;
             } else {
-                this.log("Invalid tool type: " + toolType + '\nPossible types are: ' + toolGenerators.map(g => g.aliases.join(', ')).join(', '));
+                this.log('Invalid tool type: ' + toolType + '\nPossible types are: ' + toolGenerators.map((g) => g.aliases.join(', ')).join(', '));
                 this.abort = true;
             }
         } else {
@@ -97,11 +117,11 @@ export default class extends Generator {
                 type: 'list',
                 name: 'type',
                 message: 'What type of tool do you want to create?',
-                choices: choices
+                choices: choices,
             });
 
             this.toolConfig.type = answers.type;
-            this.toolGenerator = toolGenerators.find(g => g.id === answers.type);
+            this.toolGenerator = toolGenerators.find((g) => g.id === answers.type);
         }
 
         if (!this.abort) {
@@ -122,14 +142,11 @@ export default class extends Generator {
             return;
         }
 
-        const installCommand = this.toolConfig.pkgManager === 'yarn' ? 'yarn' : 
-                              this.toolConfig.pkgManager === 'pnpm' ? 'pnpm install' : 
-                              'npm install';
+        const installCommand = this.toolConfig.pkgManager === 'yarn' ? 'yarn' : this.toolConfig.pkgManager === 'pnpm' ? 'pnpm install' : 'npm install';
 
         this.log('\nInstalling dependencies with ' + installCommand + '...\n');
 
-        this.spawnCommandSync(this.toolConfig.pkgManager, 
-            this.toolConfig.pkgManager === 'yarn' ? [] : ['install']);
+        this.spawnCommandSync(this.toolConfig.pkgManager, this.toolConfig.pkgManager === 'yarn' ? [] : ['install']);
     }
 
     end() {
@@ -145,11 +162,11 @@ export default class extends Generator {
         this.log('\n');
         this.log('Your tool has been created!\n');
         this.log('To get started:\n');
-        
+
         if (this.destinationRoot() !== process.cwd()) {
             this.log(`  cd ${path.basename(this.destinationRoot())}`);
         }
-        
+
         this.log(`  ${this.toolConfig.pkgManager === 'npm' ? 'npm run' : this.toolConfig.pkgManager} build`);
         this.log('\n');
 

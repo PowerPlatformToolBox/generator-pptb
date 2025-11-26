@@ -37,58 +37,67 @@ Power Platform Tool Box (PPTB) is a framework for building custom tools that int
 
 ## Features
 
-- 🚀 **Quick scaffolding** - Generate a complete PPTB tool project in seconds
-- 🎨 **Multiple frameworks** - Choose from HTML/TypeScript, React, Vue, or Svelte
-- 📦 **TypeScript support** - Full TypeScript integration with type definitions
-- 🔥 **Modern tooling** - Vite for fast development (React, Vue, Svelte)
-- 🎯 **Best practices** - Based on official PPTB sample tools
-- 📝 **Pre-configured** - Includes tsconfig, build scripts, and development setup
+-   🚀 **Quick scaffolding** - Generate a complete PPTB tool project in seconds
+-   🎨 **Multiple frameworks** - Choose from HTML/TypeScript, React, Vue, or Svelte
+-   📦 **TypeScript support** - Full TypeScript integration with type definitions
+-   🔥 **Modern tooling** - Vite for fast development (React, Vue, Svelte)
+-   🎯 **Best practices** - Based on official PPTB sample tools
+-   📝 **Pre-configured** - Includes tsconfig, build scripts, and development setup
 
 ## Tool Types
 
 The generator supports four different tool types:
 
 ### 1. HTML with TypeScript
+
 A simple HTML-first architecture with TypeScript. Perfect for lightweight tools.
 
 **Features:**
-- Pure HTML, CSS, and TypeScript
-- Direct DOM manipulation
-- Minimal dependencies
-- Fast build times
+
+-   Pure HTML, CSS, and TypeScript
+-   Direct DOM manipulation
+-   Minimal dependencies
+-   Fast build times
 
 **Best for:** Simple tools, forms, data viewers
 
 ### 2. React
+
 Modern React 18 application with TypeScript and Vite.
 
 **Features:**
-- React 18 with hooks
-- TypeScript support
-- Vite for fast HMR
-- Component-based architecture
+
+-   React 18 with hooks
+-   TypeScript support
+-   Vite for fast HMR
+-   Component-based architecture
+-   Fluent 9 UI, Ant Design or Material UI components
 
 **Best for:** Complex UIs, interactive dashboards, data-driven applications
 
 ### 3. Vue
+
 Vue 3 Composition API with TypeScript and Vite.
 
 **Features:**
-- Vue 3 with Composition API
-- TypeScript support
-- Vite for fast HMR
-- Reactive data binding
+
+-   Vue 3 with Composition API
+-   TypeScript support
+-   Vite for fast HMR
+-   Reactive data binding
 
 **Best for:** Progressive web apps, admin panels, forms
 
 ### 4. Svelte
+
 Svelte 5 with TypeScript and Vite.
 
 **Features:**
-- Svelte 5 with runes
-- TypeScript support
-- Vite for fast HMR
-- Compiled components (no runtime)
+
+-   Svelte 5 with runes
+-   TypeScript support
+-   Vite for fast HMR
+-   Compiled components (no runtime)
 
 **Best for:** Performance-critical apps, small bundle sizes
 
@@ -103,6 +112,7 @@ yo pptb
 ```
 
 You'll be prompted to:
+
 1. Choose a tool type (HTML/TypeScript, React, Vue, or Svelte)
 2. Enter a tool name
 3. Enter a tool identifier (package name)
@@ -120,13 +130,13 @@ yo pptb my-tool --quick
 
 ### Command-Line Options
 
-- `--quick`, `-q` - Quick mode, use defaults
-- `--toolType`, `-t` - Tool type: `html`, `react`, `vue`, or `svelte`
-- `--toolDisplayName`, `-n` - Display name of the tool
-- `--toolId` - Identifier (package name) of the tool
-- `--toolDescription` - Description of the tool
-- `--pkgManager` - Package manager: `npm`, `yarn`, or `pnpm`
-- `--gitInit` - Initialize git repository (true/false)
+-   `--quick`, `-q` - Quick mode, use defaults
+-   `--toolType`, `-t` - Tool type: `html`, `react`, `vue`, or `svelte`
+-   `--toolDisplayName`, `-n` - Display name of the tool
+-   `--toolId` - Identifier (package name) of the tool
+-   `--toolDescription` - Description of the tool
+-   `--pkgManager` - Package manager: `npm`, `yarn`, or `pnpm`
+-   `--gitInit` - Initialize git repository (true/false)
 
 **Example:**
 
@@ -177,19 +187,21 @@ my-tool/
 After generating your tool:
 
 1. **Install dependencies:**
-   ```bash
-   cd my-tool
-   npm install
-   ```
+
+    ```bash
+    cd my-tool
+    npm install
+    ```
 
 2. **Start development:**
-   ```bash
-   # For HTML/TypeScript
-   npm run watch
-   
-   # For React/Vue/Svelte
-   npm run dev
-   ```
+
+    ```bash
+    # For HTML/TypeScript
+    npm run watch
+
+    # For React/Vue/Svelte
+    npm run dev
+    ```
 
 3. **Test in PPTB*:**
    - Build your tool
@@ -217,7 +229,7 @@ After generating your tool:
 
 ## PPTB API
 
-All generated tools include access to the PPTB APIs via `window.toolboxAPI` and `window.dataverseAPI`. 
+All generated tools include access to the PPTB APIs via `window.toolboxAPI` and `window.dataverseAPI`.
 
 Full list of API references is [here](https://github.com/PowerPlatformToolBox/desktop-app/blob/main/packages/README.md#api-reference).
 
@@ -230,9 +242,9 @@ https://github.com/PowerPlatformToolBox/sample-tools
 
 ## Requirements
 
-- Node.js >= 18.0.0
-- npm, yarn, or pnpm
-- Yeoman (yo)
+-   Node.js >= 18.0.0
+-   npm, yarn, or pnpm
+-   Yeoman (yo)
 
 ## Contributing
 
@@ -248,5 +260,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Support
 
 For issues and questions:
-- Open an issue on [GitHub](https://github.com/PowerPlatformToolBox/generator-pptb/issues)
-- Check the [sample tools repository](https://github.com/PowerPlatformToolBox/sample-tools)
+
+-   Open an issue on [GitHub](https://github.com/PowerPlatformToolBox/generator-pptb/issues)
+-   Check the [sample tools repository](https://github.com/PowerPlatformToolBox/sample-tools)

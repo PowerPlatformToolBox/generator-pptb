@@ -1,0 +1,36 @@
+{
+  "name": "<%= name %>",
+  "version": "0.1.0",
+  "displayName": "<%= displayName %>",
+  "description": "<%= description %>",
+  "main": "index.html",
+  "author": "Power Platform ToolBox",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "watch": "vite build --watch",
+    "preview": "vite preview",
+    "finalize-package": "npm shrinkwrap"
+  },
+  "dependencies": {
+    "antd": "^6.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@pptb/types": "^1.0.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^7.1.11"
+  },
+  "files": [
+    "dist",
+    "npm-shrinkwrap.json"
+  ]
+}
