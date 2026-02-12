@@ -1,39 +1,33 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import ConnectionStatus from './lib/ConnectionStatus.svelte';
-    import ToolboxAPIDemo from './lib/ToolboxAPIDemo.svelte';
-    import DataverseAPIDemo from './lib/DataverseAPIDemo.svelte';
-    import EventLog from './lib/EventLog.svelte';
-    import { createConnectionStore, createEventLog, setupEventListeners } from './lib/stores';
+    import ConnectionStatus from './lib/components/ConnectionStatus.svelte';
+    import ToolboxAPIDemo from './lib/components/ToolboxAPIDemo.svelte';
+    import DataverseAPIDemo from './lib/components/DataverseAPIDemo.svelte';
+    import EventLog from './lib/components/EventLog.svelte';
+    import { ConnectionStore } from './lib/stores/connection-store.svelte';
+    import { EventLogStore } from './lib/stores/event-log-store.svelte';
 
-    const { connection, isLoading, refreshConnection } = createConnectionStore();
-    const { logs, addLog, clearLogs } = createEventLog();
+    const connectionStore = new ConnectionStore();
+    const eventLog = new EventLogStore();
 
-    // Handle platform events
-    setupEventListeners((event: string, _data: any) => {
-        addLog(`Event: ${event}`, 'info');
-
-        switch (event) {
-            case 'connection:updated':
-            case 'connection:created':
-                refreshConnection();
-                break;
-
-            case 'connection:deleted':
-                refreshConnection();
-                break;
-        }
-    });
-
-    // Initialize
     onMount(() => {
-        refreshConnection();
-        addLog('Svelte Sample Tool initialized', 'success');
+        connectionStore.refreshConnection();
+        eventLog.addLog('Svelte Sample Tool initialized', 'success');
+
+        window.toolboxAPI.events.on((_event: any, payload: ToolBoxAPI.ToolBoxEventPayload) => {
+            eventLog.addLog(`Event: ${payload.event}`, 'info');
+
+            switch (payload.event) {
+                case 'connection:updated':
+                case 'connection:created':
+                case 'connection:deleted':
+                    connectionStore.refreshConnection();
+                    break;
+            }
+        });
     });
 
-    function handleLog(event: CustomEvent<{ message: string; type?: 'info' | 'success' | 'warning' | 'error' }>) {
-        addLog(event.detail.message, event.detail.type);
-    }
+
 </script>
 
 <header class="header">
@@ -41,10 +35,10 @@
     <p class="subtitle">A complete example of building Power Platform Tool Box tools with Svelte 5 & TypeScript</p>
 </header>
 
-<ConnectionStatus connection={$connection} isLoading={$isLoading} />
+<ConnectionStatus connection={connectionStore.connection} isLoading={connectionStore.isLoading} />
 
-<ToolboxAPIDemo on:log={handleLog} />
+<ToolboxAPIDemo log={eventLog.addLog} />
 
-<DataverseAPIDemo connection={$connection} on:log={handleLog} />
+<DataverseAPIDemo connection={connectionStore.connection} log={eventLog.addLog} />
 
-<EventLog logs={$logs} onClear={clearLogs} />
+<EventLog logs={eventLog.logs} onClear={() => eventLog.clearLogs()} />

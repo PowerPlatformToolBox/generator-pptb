@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let connection: ToolBoxAPI.DataverseConnection | null = null;
-    export let isLoading: boolean = false;
+    import type ToolBoxAPI from "@pptb/types/toolboxAPI";
+    let { connection, isLoading } = $props<{connection: ToolBoxAPI.DataverseConnection | null, isLoading: boolean}>();
 </script>
 
 <div class="card">

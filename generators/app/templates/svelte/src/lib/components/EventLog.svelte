@@ -1,13 +1,12 @@
 <script lang="ts">
-    import type { LogEntry } from './stores';
+    import type { LogEntry } from "../stores/event-log-store.svelte";
 
-    export let logs: LogEntry[] = [];
-    export let onClear: () => void;
+    let { logs, onClear } = $props<{ logs: LogEntry[]; onClear: () => void }>();
 </script>
 
 <div class="card">
     <h2>📋 Event Log</h2>
-    <button class="btn btn-secondary" on:click={onClear}>Clear Log</button>
+    <button class="btn btn-secondary" onclick={onClear}>Clear Log</button>
     <div class="log">
         {#if logs.length === 0}
             <div style="color: #666; font-style: italic">No logs yet...</div>
