@@ -112,28 +112,33 @@ export default {
 
         // Copy lib components
         generator.fs.copy(
-            generator.templatePath('svelte/src/lib/ConnectionStatus.svelte'),
-            generator.destinationPath('src/lib/ConnectionStatus.svelte')
+            generator.templatePath('svelte/src/lib/components/ConnectionStatus.svelte'),
+            generator.destinationPath('src/lib/components/ConnectionStatus.svelte')
         );
 
         generator.fs.copy(
-            generator.templatePath('svelte/src/lib/DataverseAPIDemo.svelte'),
-            generator.destinationPath('src/lib/DataverseAPIDemo.svelte')
+            generator.templatePath('svelte/src/lib/components/DataverseAPIDemo.svelte'),
+            generator.destinationPath('src/lib/components/DataverseAPIDemo.svelte')
         );
 
         generator.fs.copy(
-            generator.templatePath('svelte/src/lib/EventLog.svelte'),
-            generator.destinationPath('src/lib/EventLog.svelte')
+            generator.templatePath('svelte/src/lib/components/EventLog.svelte'),
+            generator.destinationPath('src/lib/components/EventLog.svelte')
         );
 
         generator.fs.copy(
-            generator.templatePath('svelte/src/lib/ToolboxAPIDemo.svelte'),
-            generator.destinationPath('src/lib/ToolboxAPIDemo.svelte')
+            generator.templatePath('svelte/src/lib/components/ToolboxAPIDemo.svelte'),
+            generator.destinationPath('src/lib/components/ToolboxAPIDemo.svelte')
         );
 
         generator.fs.copy(
-            generator.templatePath('svelte/src/lib/stores.ts'),
-            generator.destinationPath('src/lib/stores.ts')
+            generator.templatePath('svelte/src/lib/stores/connection-store.svelte.ts'),
+            generator.destinationPath('src/lib/stores/connection-store.svelte.ts')
+        );
+
+        generator.fs.copy(
+            generator.templatePath('svelte/src/lib/stores/event-log-store.svelte.ts'),
+            generator.destinationPath('src/lib/stores/event-log-store.svelte.ts')
         );
     },
     
