@@ -1,17 +1,11 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+    let { connection, log } = $props<{ connection: ToolBoxAPI.DataverseConnection | null, log: (message: string, type?: 'info' | 'success' | 'warning' | 'error') => void }>();
 
-    export let connection: ToolBoxAPI.DataverseConnection | null = null;
-
-    const dispatch = createEventDispatcher<{
-        log: { message: string; type?: 'info' | 'success' | 'warning' | 'error' };
-    }>();
-
-    let accountName = 'Sample Account';
-    let createdAccountId: string | null = null;
-    let queryOutput = '';
-    let crudOutput = '';
-    let metadataOutput = '';
+    let accountName = $state('Sample Account');
+    let createdAccountId: string | null = $state(null);
+    let queryOutput = $state('');
+    let crudOutput = $state('');
+    let metadataOutput = $state('');
 
     async function showNotification(title: string, body: string, type: 'success' | 'info' | 'warning' | 'error') {
         try {
@@ -54,10 +48,10 @@
             });
 
             queryOutput = output;
-            dispatch('log', { message: `Queried ${result.value.length} accounts`, type: 'success' });
+            log(`Queried ${result.value.length} accounts`, 'success');
         } catch (error) {
             queryOutput = `Error: ${(error as Error).message}`;
-            dispatch('log', { message: `Error querying accounts: ${(error as Error).message}`, type: 'error' });
+            log(`Error querying accounts: ${(error as Error).message}`, 'error');
         }
     }
 
@@ -81,10 +75,10 @@
             crudOutput = `Account created successfully!\n\nID: ${result.id}\nName: ${accountName}\n`;
 
             await showNotification('Account Created', `Account "${accountName}" created successfully`, 'success');
-            dispatch('log', { message: `Account created: ${result.id}`, type: 'success' });
+            log(`Account created: ${result.id}`, 'success');
         } catch (error) {
             crudOutput = `Error: ${(error as Error).message}`;
-            dispatch('log', { message: `Error creating account: ${(error as Error).message}`, type: 'error' });
+            log(`Error creating account: ${(error as Error).message}`, 'error');
         }
     }
 
@@ -105,10 +99,10 @@
             crudOutput = `Account updated successfully!\n\nID: ${createdAccountId}\nUpdated fields: description, telephone1\n`;
 
             await showNotification('Account Updated', 'Account updated successfully', 'success');
-            dispatch('log', { message: `Account updated: ${createdAccountId}`, type: 'success' });
+            log(`Account updated: ${createdAccountId}`, 'success');
         } catch (error) {
             crudOutput = `Error: ${(error as Error).message}`;
-            dispatch('log', { message: `Error updating account: ${(error as Error).message}`, type: 'error' });
+            log(`Error updating account: ${(error as Error).message}`, 'error');
         }
     }
 
@@ -126,11 +120,11 @@
             crudOutput = `Account deleted successfully!\n\nID: ${createdAccountId}\n`;
 
             await showNotification('Account Deleted', 'Account deleted successfully', 'success');
-            dispatch('log', { message: `Account deleted: ${createdAccountId}`, type: 'success' });
+            log(`Account deleted: ${createdAccountId}`, 'success');
             createdAccountId = null;
         } catch (error) {
             crudOutput = `Error: ${(error as Error).message}`;
-            dispatch('log', { message: `Error deleting account: ${(error as Error).message}`, type: 'error' });
+            log(`Error deleting account: ${(error as Error).message}`, 'error');
         }
     }
 
@@ -144,25 +138,26 @@
             metadataOutput = 'Retrieving metadata...\n';
 
             const metadata = await window.dataverseAPI.getEntityMetadata('account', true);
+            const attributesArray = Array.isArray(metadata.Attributes) ? metadata.Attributes : [];
 
             let output = 'Account Entity Metadata:\n\n';
             output += `Logical Name: ${metadata.LogicalName}\n`;
             output += `Metadata ID: ${metadata.MetadataId}\n`;
             output += `Display Name: ${metadata.DisplayName?.LocalizedLabels?.[0]?.Label || 'N/A'}\n`;
-            output += `Attributes: ${metadata.Attributes?.length || 0}\n`;
+            output += `Attributes: ${attributesArray.length}\n`;
 
-            if (metadata.Attributes && metadata.Attributes.length > 0) {
+            if (attributesArray.length > 0) {
                 output += '\nSample Attributes:\n';
-                metadata.Attributes.slice(0, 5).forEach((attr: any) => {
+                attributesArray.slice(0, 5).forEach((attr: any) => {
                     output += `  - ${attr.LogicalName} (${attr.AttributeType})\n`;
                 });
             }
 
             metadataOutput = output;
-            dispatch('log', { message: 'Account metadata retrieved', type: 'success' });
+            log('Account metadata retrieved', 'success');
         } catch (error) {
             metadataOutput = `Error: ${(error as Error).message}`;
-            dispatch('log', { message: `Error getting metadata: ${(error as Error).message}`, type: 'error' });
+            log(`Error getting metadata: ${(error as Error).message}`, 'error');
         }
     }
 </script>
@@ -172,7 +167,7 @@
 
     <div class="example-group">
         <h3>Query Records</h3>
-        <button class="btn btn-primary" on:click={queryAccounts}>Query Top 10 Accounts</button>
+        <button class="btn btn-primary" onclick={queryAccounts}>Query Top 10 Accounts</button>
         <div class="output">{queryOutput}</div>
     </div>
 
@@ -183,16 +178,16 @@
             <input type="text" id="account-name" bind:value={accountName} placeholder="Enter account name" />
         </div>
         <div class="button-group">
-            <button class="btn btn-primary" on:click={createAccount}>Create Account</button>
-            <button class="btn" disabled={!createdAccountId} on:click={updateAccount}>Update Account</button>
-            <button class="btn btn-error" disabled={!createdAccountId} on:click={deleteAccount}>Delete Account</button>
+            <button class="btn btn-primary" onclick={createAccount}>Create Account</button>
+            <button class="btn" disabled={!createdAccountId} onclick={updateAccount}>Update Account</button>
+            <button class="btn btn-error" disabled={!createdAccountId} onclick={deleteAccount}>Delete Account</button>
         </div>
         <div class="output">{crudOutput}</div>
     </div>
 
     <div class="example-group">
         <h3>Metadata</h3>
-        <button class="btn" on:click={getAccountMetadata}>Get Account Metadata</button>
+        <button class="btn" onclick={getAccountMetadata}>Get Account Metadata</button>
         <div class="output">{metadataOutput}</div>
     </div>
 </div>
