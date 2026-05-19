@@ -1,35 +1,39 @@
 {
-  "name": "<%= name %>",
-  "version": "0.1.0",
-  "displayName": "<%= displayName %>",
-  "description": "<%= description %>",
-  "main": "index.html",
-  "author": "Power Platform ToolBox",
-  "license": "MIT",
-  "type": "module",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "finalize-package": "npm shrinkwrap"
-  },
-  "dependencies": {
-    "svelte": "^5.14.9"
-  },
-  "devDependencies": {
-    "@pptb/types": "^1.2.0",
-    "@sveltejs/vite-plugin-svelte": "^4.0.3",
-    "@tsconfig/svelte": "^5.0.4",
-    "svelte-check": "^4.1.3",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.11"
-  },
-  "files": [
-    "dist",
-    "npm-shrinkwrap.json"
-  ]
+    "name": "<%= name %>",
+    "version": "0.1.0",
+    "displayName": "<%= displayName %>",
+    "description": "<%= description %>",
+    "main": "index.html",
+    "author": "Power Platform ToolBox",
+    "license": "MIT",
+    "type": "module",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "scripts": {
+        "build": "tsc && vite build",
+        "dev": "vite",
+        "watch": "vite build --watch",
+        "dev-watch": "vite build --mode development --watch",
+        "preview": "vite preview",
+        "finalize-package": "npm shrinkwrap",
+        "validate": "pptb-validate",
+        "version-stable": "npm version patch --no-git-tag-version",
+        "publish-package": "npm run build && npm run version-stable && npm publish --access public"
+    },
+    "dependencies": {
+        "svelte": "^5.14.9"
+    },
+    "devDependencies": {
+        "@pptb/types": "^1.2.0",
+        "@sveltejs/vite-plugin-svelte": "^4.0.3",
+        "@tsconfig/svelte": "^5.0.4",
+        "svelte-check": "^4.1.3",
+        "typescript": "^5.6.3",
+        "vite": "^5.4.11"
+    },
+    "files": [
+        "dist",
+        "npm-shrinkwrap.json"
+    ]
 }

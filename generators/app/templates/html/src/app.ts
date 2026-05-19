@@ -2,7 +2,7 @@
 
 /**
  * HTML Sample Tool for Power Platform Tool Box
- * 
+ *
  * This sample demonstrates:
  * - ToolBox API usage (connections, utils, terminal, events)
  * - Dataverse API usage (CRUD, queries, metadata)
@@ -127,17 +127,13 @@ function subscribeToEvents() {
  */
 function setupEventHandlers() {
     // Notification buttons
-    document.getElementById('show-success-btn')?.addEventListener('click', () => 
-        showNotification('Success!', 'Operation completed successfully', 'success'));
-    
-    document.getElementById('show-info-btn')?.addEventListener('click', () => 
-        showNotification('Information', 'This is an informational message', 'info'));
-    
-    document.getElementById('show-warning-btn')?.addEventListener('click', () => 
-        showNotification('Warning', 'Please review this warning', 'warning'));
-    
-    document.getElementById('show-error-btn')?.addEventListener('click', () => 
-        showNotification('Error', 'An error has occurred', 'error'));
+    document.getElementById('show-success-btn')?.addEventListener('click', () => showNotification('Success!', 'Operation completed successfully', 'success'));
+
+    document.getElementById('show-info-btn')?.addEventListener('click', () => showNotification('Information', 'This is an informational message', 'info'));
+
+    document.getElementById('show-warning-btn')?.addEventListener('click', () => showNotification('Warning', 'Please review this warning', 'warning'));
+
+    document.getElementById('show-error-btn')?.addEventListener('click', () => showNotification('Error', 'An error has occurred', 'error'));
 
     // Utility buttons
     document.getElementById('copy-clipboard-btn')?.addEventListener('click', copyToClipboard);
@@ -173,7 +169,7 @@ async function showNotification(title: string, body: string, type: 'success' | '
             title,
             body,
             type,
-            duration: 3000
+            duration: 3000,
         });
         log(`Notification shown: ${title} - ${body}`, type);
     } catch (error) {
@@ -189,7 +185,7 @@ async function copyToClipboard() {
         const data = {
             timestamp: new Date().toISOString(),
             connection: currentConnection?.name || 'No connection',
-            message: 'This data was copied from the HTML Sample Tool'
+            message: 'This data was copied from the HTML Sample Tool',
         };
 
         await toolbox.utils.copyToClipboard(JSON.stringify(data, null, 2));
@@ -219,18 +215,17 @@ async function saveDataToFile() {
     try {
         const data = {
             timestamp: new Date().toISOString(),
-            connection: currentConnection ? {
-                name: currentConnection.name,
-                url: currentConnection.url,
-                environment: currentConnection.environment
-            } : null,
-            message: 'Export from HTML Sample Tool'
+            connection: currentConnection
+                ? {
+                      name: currentConnection.name,
+                      url: currentConnection.url,
+                      environment: currentConnection.environment,
+                  }
+                : null,
+            message: 'Export from HTML Sample Tool',
         };
 
-        const filePath = await toolbox.utils.saveFile(
-            'sample-export.json',
-            JSON.stringify(data, null, 2)
-        );
+        const filePath = await toolbox.fileSystem.saveFile('sample-export.json', JSON.stringify(data, null, 2));
 
         if (filePath) {
             await showNotification('File Saved', `File saved to: ${filePath}`, 'success');
@@ -249,15 +244,15 @@ async function saveDataToFile() {
 async function createTerminal() {
     try {
         currentTerminal = await toolbox.terminal.create({
-            name: 'HTML Sample Terminal'
+            name: 'HTML Sample Terminal',
         });
 
         log(`Terminal created: ${currentTerminal.name} (${currentTerminal.id})`, 'success');
-        
+
         // Enable command buttons
         const executeBtn = document.getElementById('execute-command-btn') as HTMLButtonElement;
         const closeBtn = document.getElementById('close-terminal-btn') as HTMLButtonElement;
-        
+
         if (executeBtn) executeBtn.disabled = false;
         if (closeBtn) closeBtn.disabled = false;
 
@@ -306,7 +301,7 @@ async function closeTerminal() {
         // Disable command buttons
         const executeBtn = document.getElementById('execute-command-btn') as HTMLButtonElement;
         const closeBtn = document.getElementById('close-terminal-btn') as HTMLButtonElement;
-        
+
         if (executeBtn) executeBtn.disabled = true;
         if (closeBtn) closeBtn.disabled = true;
 
@@ -401,7 +396,7 @@ async function createContact() {
     try {
         const firstnameInput = document.getElementById('contact-firstname') as HTMLInputElement;
         const lastnameInput = document.getElementById('contact-lastname') as HTMLInputElement;
-        
+
         const output = document.getElementById('crud-output');
         if (output) output.textContent = 'Creating contact...\n';
 
@@ -409,7 +404,7 @@ async function createContact() {
             firstname: firstnameInput.value,
             lastname: lastnameInput.value,
             telephone1: '555-0100',
-            description: 'Created by HTML Sample Tool'
+            description: 'Created by HTML Sample Tool',
         });
 
         createdId = result.id;
@@ -450,7 +445,7 @@ async function updateContact() {
 
         await dataverse.update('contact', createdId, {
             description: 'Updated by HTML Sample Tool at ' + new Date().toISOString(),
-            telephone1: '555-0200'
+            telephone1: '555-0200',
         });
 
         if (output) {
@@ -556,20 +551,20 @@ function log(message: string, type: 'info' | 'success' | 'warning' | 'error' = '
     const timestamp = new Date().toLocaleTimeString();
     const logEntry = document.createElement('div');
     logEntry.className = `log-entry ${type}`;
-    
+
     const timestampSpan = document.createElement('span');
     timestampSpan.className = 'log-timestamp';
     timestampSpan.textContent = `[${timestamp}]`;
-    
+
     const messageSpan = document.createElement('span');
     messageSpan.textContent = message;
-    
+
     logEntry.appendChild(timestampSpan);
     logEntry.appendChild(document.createTextNode(' '));
     logEntry.appendChild(messageSpan);
 
     logDiv.insertBefore(logEntry, logDiv.firstChild);
-    
+
     // Keep only last 50 entries
     while (logDiv.children.length > 50) {
         logDiv.removeChild(logDiv.lastChild!);

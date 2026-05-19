@@ -18,46 +18,49 @@ function fixHtmlForPPTB(): Plugin {
             html = html.replace(/\s*crossorigin/g, '');
             // Clean up extra spaces around attributes
             html = html.replace(/\s+>/g, '>');
-            
+
             // Move script tags from head to end of body
             // IIFE executes immediately, so DOM must be ready
             const scriptRegex = /(<script[^>]*src="[^"]*"[^>]*><\/script>)/g;
             const scripts: string[] = [];
-            
+
             // Extract all script tags
             html = html.replace(scriptRegex, (match) => {
                 scripts.push(match);
                 return ''; // Remove from current position
             });
-            
+
             // Insert scripts before closing body tag
             if (scripts.length > 0) {
                 const scriptsHtml = '\n  ' + scripts.join('\n  ');
                 html = html.replace('</body>', scriptsHtml + '\n</body>');
             }
-            
+
             return html;
         },
     };
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
-    plugins: [vue(), fixHtmlForPPTB()],
-    base: './',
-    build: {
-        outDir: 'dist',
-        assetsDir: 'assets',
-        rollupOptions: {
-            output: {
-                // Use IIFE format for compatibility with iframe srcdoc loading
-                // ES modules can have issues when loaded via file:// URLs in iframes
-                format: 'iife',
-                // Bundle everything into a single file to avoid module loading issues
-                inlineDynamicImports: true,
-                // Disable chunking since we're bundling everything
-                manualChunks: undefined,
+export default defineConfig((configEnv) => {
+    return {
+        plugins: [vue(), fixHtmlForPPTB()],
+        base: './',
+        build: {
+            outDir: 'dist',
+            assetsDir: 'assets',
+            sourcemap: configEnv.mode === 'development',
+            rollupOptions: {
+                output: {
+                    // Use IIFE format for compatibility with iframe srcdoc loading
+                    // ES modules can have issues when loaded via file:// URLs in iframes
+                    format: 'iife',
+                    // Bundle everything into a single file to avoid module loading issues
+                    inlineDynamicImports: true,
+                    // Disable chunking since we're bundling everything
+                    manualChunks: undefined,
+                },
             },
         },
-    },
+    };
 });

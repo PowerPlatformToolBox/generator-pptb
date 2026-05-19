@@ -1,25 +1,25 @@
 {
     "compilerOptions": {
         "target": "ES2022",
-        "module": "ES2022",
-        "lib": ["ES2022", "DOM", "DOM.Iterable"],
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "bundler",
-        "declaration": false,
-        "sourceMap": true,
-        "allowSyntheticDefaultImports": true,
-        "isolatedModules": true,
         "useDefineForClassFields": true,
-        "moduleDetection": "force",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        "types": ["@pptb/types"],
+
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+
+        /* Linting */
+        "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
+    "include": ["src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }

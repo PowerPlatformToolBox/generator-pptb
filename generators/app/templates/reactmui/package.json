@@ -13,8 +13,12 @@
         "build": "tsc && vite build",
         "dev": "vite",
         "watch": "vite build --watch",
+        "dev-watch": "vite build --mode development --watch",
         "preview": "vite preview",
-        "finalize-package": "npm shrinkwrap"
+        "finalize-package": "npm shrinkwrap",
+        "validate": "pptb-validate",
+        "version-stable": "npm version patch --no-git-tag-version",
+        "publish-package": "npm run build && npm run version-stable && npm publish --access public"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",

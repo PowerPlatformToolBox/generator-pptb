@@ -36,23 +36,43 @@ npm install
 
 ## Development
 
-Start development server with HMR:
-
-```bash
-npm run dev
-```
-
-Build the tool:
+**Build the tool:**
 
 ```bash
 npm run build
 ```
 
-Preview production build:
+**Dev build with sourcemaps (watch mode):**
 
 ```bash
-npm run preview
+npm run dev-watch
 ```
+
+**Validate tool package:**
+
+```bash
+npm run validate
+```
+
+**Shrinkwrap package:**
+
+```bash
+npm run finalize-package
+```
+
+or;
+
+```bash
+npm shrinkwrap
+```
+
+**Publish new version:**
+
+```bash
+npm run publish-package
+```
+
+_Further tool development documentation is available @ https://docs.powerplatformtoolbox.com/tool-development_
 
 ## Usage in ToolBox
 
@@ -76,9 +96,9 @@ console.log(context.accessToken);
 
 ```typescript
 await window.toolboxAPI.showNotification({
-  title: 'Success',
-  body: 'Operation completed',
-  type: 'success'
+    title: 'Success',
+    body: 'Operation completed',
+    type: 'success',
 });
 ```
 
@@ -86,8 +106,8 @@ await window.toolboxAPI.showNotification({
 
 ```typescript
 window.toolboxAPI.onToolboxEvent((event, payload) => {
-  console.log('Event:', payload.event);
-  console.log('Data:', payload.data);
+    console.log('Event:', payload.event);
+    console.log('Data:', payload.data);
 });
 ```
 

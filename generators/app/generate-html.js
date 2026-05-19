@@ -12,7 +12,7 @@ export default {
     id: 'tool-html',
     aliases: ['html', 'typescript', 'ts'],
     name: 'HTML with TypeScript',
-    
+
     /**
      * @param {Generator} generator
      * @param {ToolConfig} toolConfig
@@ -24,63 +24,46 @@ export default {
         await prompts.askForGit(generator, toolConfig);
         await prompts.askForPackageManager(generator, toolConfig);
     },
-    
+
     /**
      * @param {Generator} generator
      * @param {ToolConfig} toolConfig
      */
     writing: (generator, toolConfig) => {
         // Copy package.json template
-        generator.fs.copyTpl(
-            generator.templatePath('html/package.json'),
-            generator.destinationPath('package.json'),
-            toolConfig
-        );
+        generator.fs.copyTpl(generator.templatePath('html/package.json'), generator.destinationPath('package.json'), toolConfig);
 
         // Copy tsconfig.json
-        generator.fs.copy(
-            generator.templatePath('html/tsconfig.json'),
-            generator.destinationPath('tsconfig.json')
-        );
+        generator.fs.copy(generator.templatePath('html/tsconfig.json'), generator.destinationPath('tsconfig.json'));
+
+        // Copy tsconfig.node.json
+        generator.fs.copy(generator.templatePath('html/tsconfig.node.json'), generator.destinationPath('tsconfig.node.json'));
+
+        // Copy tsconfig.node.json
+        generator.fs.copy(generator.templatePath('html/tsconfig.node.json'), generator.destinationPath('tsconfig.node.json'));
+
+        // Copy vite.config.ts
+        generator.fs.copy(generator.templatePath('html/vite.config.ts'), generator.destinationPath('vite.config.ts'));
 
         // Copy .gitignore if git is initialized
         if (toolConfig.gitInit) {
-            generator.fs.copy(
-                generator.templatePath('html/gitignore'),
-                generator.destinationPath('.gitignore')
-            );
+            generator.fs.copy(generator.templatePath('html/gitignore'), generator.destinationPath('.gitignore'));
         }
 
         // Copy .npmignore
-        generator.fs.copy(
-            generator.templatePath('html/npmignore'),
-            generator.destinationPath('.npmignore')
-        );
+        generator.fs.copy(generator.templatePath('html/npmignore'), generator.destinationPath('.npmignore'));
 
         // Copy README
-        generator.fs.copyTpl(
-            generator.templatePath('html/README.md'),
-            generator.destinationPath('README.md'),
-            toolConfig
-        );
+        generator.fs.copyTpl(generator.templatePath('html/README.md'), generator.destinationPath('README.md'), toolConfig);
 
         // Copy source files
-        generator.fs.copy(
-            generator.templatePath('html/src/index.html'),
-            generator.destinationPath('src/index.html')
-        );
+        generator.fs.copy(generator.templatePath('html/src/index.html'), generator.destinationPath('src/index.html'));
 
-        generator.fs.copy(
-            generator.templatePath('html/src/app.ts'),
-            generator.destinationPath('src/app.ts')
-        );
+        generator.fs.copy(generator.templatePath('html/src/app.ts'), generator.destinationPath('src/app.ts'));
 
-        generator.fs.copy(
-            generator.templatePath('html/src/styles.css'),
-            generator.destinationPath('src/styles.css')
-        );
+        generator.fs.copy(generator.templatePath('html/src/styles.css'), generator.destinationPath('src/styles.css'));
     },
-    
+
     /**
      * @param {Generator} generator
      * @param {ToolConfig} toolConfig
@@ -88,5 +71,5 @@ export default {
     endMessage: (generator, toolConfig) => {
         generator.log('Your HTML/TypeScript tool is ready!');
         generator.log('Build your tool with: ' + (toolConfig.pkgManager === 'npm' ? 'npm run build' : toolConfig.pkgManager + ' build'));
-    }
+    },
 };
