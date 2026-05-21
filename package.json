@@ -1,6 +1,6 @@
 {
   "name": "generator-pptb",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Yeoman generator for Power Platform Tool Box to help you create tools",
   "keywords": [
     "yeoman-generator",
